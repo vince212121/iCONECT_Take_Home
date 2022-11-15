@@ -1,1 +1,3 @@
-# iCONECT_Take_Home
+# iCONECT Take Home Assessment
+
+C++ Console Application
