@@ -18,5 +18,13 @@
     <ClCompile Include="VincentLi_Question1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Oracle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Oracle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 \purpose:	Used for the implementation of the Oracle class
 */
 
+#include <iostream>
 #include "Oracle.h"
 
 /// <summary>
@@ -20,6 +21,7 @@ COracle::COracle(ICONECT_ERRORPROC ErrorProc)
 /// </summary>
 COracle::~COracle()
 {
+	std::cout << "\nDB disconnected and closed" << std::endl;
 }
 
 /// <summary>
@@ -29,7 +31,8 @@ COracle::~COracle()
 /// <returns></returns>
 bool COracle::Open(const char* szQuery)
 {
-	return false;
+	// Make open by default
+	return true;
 }
 
 /// <summary>
@@ -57,9 +60,9 @@ char* COracle::GetFieldName(int nField)
 /// Returns the number of fields in the active query.
 /// </summary>
 /// <returns></returns>
-char* COracle::GetFieldCount()
+int COracle::GetFieldCount()
 {
-	return nullptr;
+	return 0;
 }
 
 /// <summary>
@@ -77,6 +80,7 @@ bool COracle::MoveNext()
 /// <returns></returns>
 bool COracle::IsEOF()
 {
-	return false;
+	// Making true by default to prevent infinite looping
+	return true;
 }
 

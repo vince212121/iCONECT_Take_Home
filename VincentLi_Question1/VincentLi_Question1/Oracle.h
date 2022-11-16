@@ -21,9 +21,10 @@ public:
 	bool Open(const char* szQuery);
 	char* GetFieldValue(int nField);
 	char* GetFieldName(int nField);
-	char* GetFieldCount();
+	int GetFieldCount();
 	bool MoveNext();
 	bool IsEOF();
+
 };
 
 #endif // !ORACLE_H

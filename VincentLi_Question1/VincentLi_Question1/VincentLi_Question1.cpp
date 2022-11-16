@@ -6,20 +6,43 @@
 */
 
 #include <iostream>
+#include "Oracle.h"
+#include <vector>
+#include <format>
 
 int main()
 {
 
-    std::cout << "Hello World!\n";
+    COracle *cOracle = new COracle();
+    const char* szQuery = "SELECT OBJECT_ID, AUTHOR, TITLE FROM testing WHERE AUTHOR IS 'iconect\\london' OR OBJECT_ID >= 5;";
+    const int objectIDIndex = 0;
+    const int authorIndex = 1;
+    const int titleIndex = 2;
+
+    if (cOracle->Open(szQuery))
+    {
+        std::vector<std::string> data;
+        data.push_back("OBJECT_ID, AUTHOR, TITLE");
+
+        // Only push the data if there are fields
+        if (cOracle->GetFieldCount() > 0)
+        {
+            while (!cOracle->IsEOF()) {
+                // Push the data and move to the next record
+                data.push_back(std::format("{}, {}, {}", cOracle->GetFieldName(objectIDIndex), cOracle->GetFieldName(authorIndex), cOracle->GetFieldName(titleIndex)));
+                cOracle->MoveNext();
+            };
+        }
+        else
+        {
+            std::cout << "No fields to display." << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Unable to execute query." << std::endl;
+    }
+
+    // Freeing memory and closing the connection
+    delete cOracle;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
