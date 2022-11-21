@@ -29,8 +29,16 @@ int main()
         {
             while (!cOracle->IsEOF()) {
                 // Push the data and move to the next record
-                data.push_back(std::format("{}, {}, {}", cOracle->GetFieldName(objectIDIndex), cOracle->GetFieldName(authorIndex), cOracle->GetFieldName(titleIndex)));
+                char* objectID = cOracle->GetFieldValue(objectIDIndex);
+                char* author = cOracle->GetFieldValue(authorIndex);
+                char* title = cOracle->GetFieldValue(titleIndex);
+                data.push_back(std::format("{}, {}, {}", objectID, author, title));
                 cOracle->MoveNext();
+
+                // Use [] since they are created with the new key word
+                delete[] objectID;
+                delete[] author;
+                delete[] title;
             };
         }
         else
